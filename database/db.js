@@ -10,6 +10,7 @@ const {
     DB_PORT } = process.env
 
 
+// https://sequelize.org/docs/v6/getting-started/
 const sequelize = new Sequelize(
     `${DB_TYPE}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`)
 
