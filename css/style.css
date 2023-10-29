@@ -3,18 +3,28 @@ body {
     background-color: rgb(124, 124, 124);
 }
 
+.main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
 .menu {
-    position: absolute;
+    flex: 1 1 30%;
     background-color: rgb(115, 0, 255);
     width: 25%;
     left: 0;
     height: 100vh;
 }
 
+#container3D {
+    flex: 1 1 70%;
+}
+
 #container3D canvas {
-    width: 100vw !important;
-    height: 100vh !important;
-    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    /* position: absolute; */
     top: 0;
     left: 0;
 }
