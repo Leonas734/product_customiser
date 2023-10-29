@@ -2,6 +2,7 @@ require('dotenv').config()
 const Sequelize = require('sequelize')
 
 const {
+    DB_TYPE,
     DB_HOST,
     DB_USER,
     DB_PASSWORD,
@@ -10,7 +11,7 @@ const {
 
 
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`)
+    `${DB_TYPE}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`)
 
 
 // Test connection
@@ -24,9 +25,9 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.products = require("./product.js")(sequelize, Sequelize);
-db.extras = require("./extra.js")(sequelize, Sequelize);
-db.options = require("./option.js")(sequelize, Sequelize);
+db.products = require("./models/product.js")(sequelize, Sequelize);
+db.extras = require("./models/extra.js")(sequelize, Sequelize);
+db.options = require("./models/option.js")(sequelize, Sequelize);
 
 db.products.hasMany(db.extras, { as: "extras" });
 db.extras.belongsTo(db.products, {

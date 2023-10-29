@@ -1,6 +1,6 @@
 express = require('express')
 path = require('path');
-const db = require("../database/models");
+const db = require("../database/db");
 const controller = require("../database/controller");
 
 const app = express()

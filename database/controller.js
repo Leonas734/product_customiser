@@ -1,4 +1,4 @@
-const db = require("./models")
+const db = require("./db")
 
 const Product = db.products;
 const Extra = db.extras;
@@ -19,7 +19,7 @@ exports.CreateExtra = (title, productId) => {
         console.log("Successfully created product extra" + JSON.stringify(extra))
         return extra
     }).catch((err) => {
-        console.log("Error while creating product: ", err)
+        console.log("Error while creating product extra: ", err)
     })
 }
 
