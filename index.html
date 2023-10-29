@@ -4,12 +4,21 @@
 <head lang="en">
     <meta charset="utf-8">
     <title>My first three.js app</title>
-    <script type="module" src="javascript/main.js"></script>
     <link rel="stylesheet" href="css/style.css">
+
+    <script type="module" src="javascript/loading-screen.js"></script>
+    <script type="module" src="javascript/main.js"></script>
+    <script type="module" src="javascript/menu.js"></script>
+
 </head>
 
 <body>
-    <div class="main">
+    <div id="loading-screen">
+        <div id="loading-bar"></div>
+        <p>Loading... <span id="loading-bar-value"></span></p>
+    </div>
+
+    <div id="main" class="main">
         <div class="menu"></div>
         <div id="container3D"></div>
     </div>
