@@ -6,7 +6,7 @@ class ProductMenu extends HTMLElement {
         this.scene;
         this.productDropDown = document.createElement("div"); 
         this.products = data.products;
-        this.currentProduct = null;
+        this.currentProduct = {productData: null, extras: []};
     }
 
     Init(scene)
@@ -14,7 +14,6 @@ class ProductMenu extends HTMLElement {
         this.scene = scene;
         this.HideAllObjects();
         this.UpdateCurrentProduct(this.products[0]);
-        this.RenderProductDropDown();
     }
 
     HideAllObjects()
@@ -37,7 +36,39 @@ class ProductMenu extends HTMLElement {
         } );
     }
 
-    RenderProductDropDown()
+    UpdateCurrentProduct(newProduct)
+    {
+
+        // Set previous selection back to invisible
+        if (this.currentProduct.productData != null)
+        {
+            this.currentProduct.productData.base_objects.forEach((bo) => {
+                const p = this.scene.getObjectByName(bo);
+                p.visible = false;
+            })
+        }
+        
+        this.currentProduct.productData = newProduct;
+        this.currentProduct.productData.base_objects.forEach((bo) => {
+            const p = this.scene.getObjectByName(bo);
+            p.visible = true;
+        })
+
+        this.ClearMenu();
+        this.RenderCurrentProduct();
+
+        // Each time the product changes, so do the extras.
+        const extra = this.currentProduct.productData.extras[this.currentProduct.productData.default_extra]
+        const option = extra.options[extra.default_option];
+        this.UpdateExtra(extra, option);
+    }
+
+    ClearMenu()
+    {
+        this.innerHTML = '';
+    }
+
+    RenderCurrentProduct()
     {
         const containerDiv = document.createElement("div");
         containerDiv.classList.add("dropdown");
@@ -61,24 +92,31 @@ class ProductMenu extends HTMLElement {
             select.append(newOption);
         })
 
+        // Set user selected product in the dropdown.
+        select.value = this.currentProduct.productData.title;
+
         containerDiv.append(select);
         this.append(containerDiv);
     }
 
-    UpdateCurrentProduct(newProduct)
+    UpdateExtra(newExtra, newOption)
     {
-
-        if (this.currentProduct != null)
+        const prevExtra = this.currentProduct.extras.filter((data) => data.extra.title == newExtra.title);
+        // if previously previously an extra was selected, clear it before setting the new one.
+        if (prevExtra.length > 0)
         {
-            this.currentProduct.base_objects.forEach((bo) => {
-                const p = this.scene.getObjectByName(bo);
+            prevExtra[0].option.objects.forEach((obj) => {
+                const p = this.scene.getObjectByName(obj);
                 p.visible = false;
             })
+            this.currentProduct.extras = this.currentProduct.extras.filter(
+                (data) => data.extra.title != newExtra.title);
         }
-        
-        this.currentProduct = newProduct;
 
-        this.currentProduct.base_objects.forEach((bo) => {
+        const newExtraObj = { extra: newExtra, option: newOption }
+        this.currentProduct.extras.push(newExtraObj);
+
+        newExtraObj.option.objects.forEach((bo) => {
             const p = this.scene.getObjectByName(bo);
             p.visible = true;
         })
@@ -88,8 +126,48 @@ class ProductMenu extends HTMLElement {
 
     RenderExtras()
     {
+        this.querySelector(".extras")?.remove();
 
+        this.currentProduct.productData.extras.forEach((extra) => {
+
+            const containerDiv = document.createElement("div");
+            containerDiv.classList.add("dropdown", "extras");
+    
+            const label = document.createElement("label");
+            label.textContent = extra.title;
+            containerDiv.append(label);
+    
+            const select = document.createElement("select");
+    
+            select.addEventListener('change', (e) => {
+                const newExtra = this.currentProduct.productData.extras.filter(
+                    (prodExtra) => prodExtra.title == extra.title)[0];
+                
+                const newOption = newExtra.options.filter(opt => opt.title == e.target.value)[0];
+                this.UpdateExtra(newExtra, newOption);
+            });
+            
+            extra.options.forEach((option) => {
+                const newOption = document.createElement("option");
+    
+                newOption.value = option.title;
+                newOption.textContent = option.title;
+                select.append(newOption);
+            })
+
+
+            // Select user selected value from dropdown
+            const selectedExtra = this.currentProduct.extras.filter((data) =>
+             data.extra.title == extra.title);
+
+            if (selectedExtra.length > 0) select.value = selectedExtra[0].option.title;
+            // select.value = selectedExtra[0].option
+
+            containerDiv.append(select);
+            this.append(containerDiv);
+        })
     }
+
 }
 
 customElements.define("product-menu", ProductMenu);
