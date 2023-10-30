@@ -15,7 +15,7 @@ let controls;
 const loader = new GLTFLoader();
 
 loader.load(
-    `../../models/scene.gltf`,
+    `../../models/houses.gltf`,
     function (gltf) {
         //If the file is loaded, add it to the scene
         scene.add(gltf.scene);

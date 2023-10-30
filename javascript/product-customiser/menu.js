@@ -1,14 +1,23 @@
 let threeJSScene;
+import { data } from "./data/data"
+
 
 function InitMenu(scene)
 {
     threeJSScene = scene;
-    scene.traverse( function( object ) {
+    UpdateGlassOpacity()
+}
 
-        if ( object.isMesh ) console.log( object );
-    
+function UpdateGlassOpacity()
+{
+    threeJSScene.traverse( function( object ) {
+        if (object?.userData?.name?.toLowerCase()?.includes("glass"))
+        {
+            object.material.transparent = true;
+            object.material.opacity = 0.5; 
+        }
+
     } );
-
 }
 
 export { InitMenu }
