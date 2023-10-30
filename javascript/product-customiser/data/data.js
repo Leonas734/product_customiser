@@ -10,7 +10,7 @@ const data = {
             "default_extra": 0,
             "extras": [
                 {
-                    "title": "Doors",
+                    "title": "Doors and Windows",
                     "default_option": 0,
                     "options": [
                         {
@@ -50,7 +50,7 @@ const data = {
             "default_extra": 0,
             "extras": [
                 {
-                    "title": "Doors",
+                    "title": "Doors and Windows",
                     "default_option": 0,
                     "options": [
                         {
