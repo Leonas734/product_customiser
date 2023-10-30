@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 
 app.get('/admin', async (req, res) => {
     await db.sequelize.sync();
-    await controller.CreateProduct('bob', [], 99.00);
+    await controller.CreateProduct('foobar', [], 99.00);
     res.sendFile(path.join(__dirname, "..", "/html/admin/admin.html"));
 })
 

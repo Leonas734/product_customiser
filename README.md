@@ -3,7 +3,7 @@
 1. Check if your computer has npm and NodeJS installed using `node -v` `npm -v`. Installation instructions can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 2. Install project packages using the `npm install` in the same directory as the package-lock.json file. 
 3. Duplicate .envexample, rename to .env and update all values. Run local postgres server if required.
-4. Run `npm run dev` in the same directory as the package.json file.
+4. Run `npm run three` for frontend only or `npm run server` for full stack application.
 
 ## Tech used
 * [ExpressJS](https://expressjs.com/) - Backend
