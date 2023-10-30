@@ -4,7 +4,9 @@
   "description": "Product configuration with three.js",
   "main": "./javascript/main.js",
   "scripts": {
-    "dev": "nodemon ./javascript/server.js"
+    "server": "nodemon ./javascript/server.js",
+    "three": "npx vite"
+
   },
   "author": "",
   "license": "ISC",
