@@ -70,7 +70,7 @@ class MainPage extends HTMLElement {
     AddResizeListener()
     {
         //Add a listener to the window, so we can resize the window and the camera
-        window.addEventListener("resize", function () {
+        window.addEventListener("resize", () => {
             this.camera.aspect = window.innerWidth * this.SCREEN_PERCENTAGE / window.innerHeight;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(window.innerWidth * this.SCREEN_PERCENTAGE, window.innerHeight);
