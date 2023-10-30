@@ -7,6 +7,7 @@ class ProductMenu extends HTMLElement {
         this.productDropDown = document.createElement("div"); 
         this.products = data.products;
         this.currentProduct = {productData: null, extras: []};
+        this.currentPrice;
     }
 
     Init(scene)
@@ -38,7 +39,6 @@ class ProductMenu extends HTMLElement {
 
     UpdateCurrentProduct(newProduct)
     {
-
         // Set previous selection back to invisible
         if (this.currentProduct.productData != null)
         {
@@ -74,7 +74,7 @@ class ProductMenu extends HTMLElement {
         containerDiv.classList.add("dropdown");
 
         const label = document.createElement("label");
-        label.textContent = "Select Product";
+        label.textContent = "Size";
         containerDiv.append(label);
 
         const select = document.createElement("select");
@@ -88,7 +88,7 @@ class ProductMenu extends HTMLElement {
             const newOption = document.createElement("option");
 
             newOption.value = product.title;
-            newOption.textContent = product.title;
+            newOption.textContent = `${product.title} (+£${parseFloat(product.price).toFixed(2)})`;
             select.append(newOption);
         })
 
@@ -122,6 +122,7 @@ class ProductMenu extends HTMLElement {
         })
 
         this.RenderExtras();
+        this.UpdatePrice();
     }
 
     RenderExtras()
@@ -151,10 +152,9 @@ class ProductMenu extends HTMLElement {
                 const newOption = document.createElement("option");
     
                 newOption.value = option.title;
-                newOption.textContent = option.title;
+                newOption.textContent = `${option.title} (+£${parseFloat(option.price).toFixed(2)})`;;
                 select.append(newOption);
             })
-
 
             // Select user selected value from dropdown
             const selectedExtra = this.currentProduct.extras.filter((data) =>
@@ -166,6 +166,23 @@ class ProductMenu extends HTMLElement {
             containerDiv.append(select);
             this.append(containerDiv);
         })
+    }
+
+    UpdatePrice()
+    {
+        let total = 0;
+        total += this.currentProduct.productData.price;
+        
+        this.currentProduct.extras.forEach((data) => {
+            total += data.option.price
+        })
+
+        this.querySelector('.total-price')?.remove();
+        
+        const totalEl = document.createElement("p");
+        totalEl.textContent = `Total: £${total}`
+        totalEl.classList.add("total-price");
+        this.append(totalEl);
     }
 
 }

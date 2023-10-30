@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: rgb(124, 124, 124);
+    font-family: "Poppins", sans-serif;
 }
 
 loading-screen {
@@ -41,11 +42,18 @@ product-menu .dropdown {
 }
 
 product-menu label,
-product-menu select {
+product-menu select,
+product-menu .total-price {
     font-size: 22px;
 }
 
-#container3D {
+product-menu .total-price {
+    padding: 0 .5rem;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+product-menu-total #container3D {
     flex: 1 1 70%;
 }
 
