@@ -1,28 +1,31 @@
-const loadingScreen = document.getElementById("loading-screen")
-const loadingBar = document.getElementById("loading-bar");
-const loadingBarValue = document.getElementById("loading-bar-value");
+class LoadingScreen extends HTMLElement{
+    constructor()
+    {
+        super();
+        this.loadingBar = this.querySelector("#loading-bar");
+        this.loadingBarValue = this.querySelector("#loading-bar-value");
+    }
 
+    UpdateLoadingBar(value)
+    {
+        this.loadingBar.style.width = `${value / 5}%`;
+        this.loadingBarValue.textContent = `${Math.round(value)}%`;
+    }
 
-function UpdateLoadingBar(value)
-{
-    console.log(value);
-    loadingBar.style.width = `${value / 5}%`;
-    loadingBarValue.textContent = `${Math.round(value)}%`;
+    HideLoadingScreen()
+    {
+        const fadeEffect = setInterval(() => {
+            if (!this.style.opacity) {
+                this.style.opacity = 1;
+            }
+            if (this.style.opacity > 0) {
+                this.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect);
+                this.style.display = 'none'; // Hide the element
+            }
+        }, 25);
+    }
 }
 
-function HideLoadingScreen()
-{
-    const fadeEffect = setInterval(function () {
-        if (!loadingScreen.style.opacity) {
-            loadingScreen.style.opacity = 1;
-        }
-        if (loadingScreen.style.opacity > 0) {
-            loadingScreen.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            loadingScreen.style.display = 'none'; // Hide the element
-        }
-    }, 25);
-}
-
-export { UpdateLoadingBar, HideLoadingScreen }
+customElements.define("loading-screen", LoadingScreen);

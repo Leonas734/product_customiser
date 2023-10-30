@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="../../css/product-customiser/style.css">
 
     <script type="module" src="../../javascript/product-customiser/loading-screen.js"></script>
-    <script type="module" src="../../javascript/product-customiser/main.js"></script>
-    <script type="module" src="../../javascript/product-customiser/menu.js"></script>
+    <script type="module" src="../../javascript/product-customiser/main-page.js"></script>
+    <script type="module" src="../../javascript/product-customiser/product-menu.js"></script>
 
 </head>
 
 <body>
-    <div id="loading-screen">
+    <loading-screen class="loading-screen">
         <div id="loading-bar"></div>
         <p>Loading... <span id="loading-bar-value"></span></p>
-    </div>
+    </loading-screen>
 
-    <div id="main" class="main">
-        <div class="menu"></div>
+    <main-page>
+        <product-menu></product-menu>
         <div id="container3D"></div>
-    </div>
+    </main-page>
 
 </body>
 
