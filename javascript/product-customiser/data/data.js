@@ -23,7 +23,7 @@ const data = {
                                 "36x24_Single_Window",
                                 "36x24_Single_WindowGlass",
                                 "36x24_Single_DoorGlass",
-                                "3x6x24_Single_DoorHandle"
+                                "36x24_Single_DoorHandle"
                             ]
                         },
                         {
@@ -34,7 +34,7 @@ const data = {
                                 "36x24_Double_Door",
                                 "36x24_Double_DoorGlass1",
                                 "36x24_Double_DoorGlass0",
-                                "3x6x24_Double_DoorHandle"
+                                "36x24_Double_DoorHandle"
                             ]
                         }
                     ]

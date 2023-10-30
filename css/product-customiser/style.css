@@ -34,6 +34,17 @@ product-menu {
     height: 100vh;
 }
 
+product-menu .dropdown {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+product-menu label,
+product-menu select {
+    font-size: 22px;
+}
+
 #container3D {
     flex: 1 1 70%;
 }
