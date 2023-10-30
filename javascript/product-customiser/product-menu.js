@@ -13,9 +13,8 @@ class ProductMenu extends HTMLElement {
     {
         this.scene = scene;
         this.HideAllObjects();
-        this.LoadMenu();
         this.UpdateCurrentProduct(this.products[0]);
-        this.RenderExtras();
+        this.RenderProductDropDown();
     }
 
     HideAllObjects()
@@ -36,11 +35,6 @@ class ProductMenu extends HTMLElement {
                     object.visible = false;
                 }
         } );
-    }
-
-    LoadMenu()
-    {
-        this.RenderProductDropDown();
     }
 
     RenderProductDropDown()
@@ -88,6 +82,13 @@ class ProductMenu extends HTMLElement {
             const p = this.scene.getObjectByName(bo);
             p.visible = true;
         })
+
+        this.RenderExtras();
+    }
+
+    RenderExtras()
+    {
+
     }
 }
 
