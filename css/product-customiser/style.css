@@ -33,24 +33,8 @@ product-menu {
     width: 25%;
     left: 0;
     height: 100vh;
-}
-
-product-menu .dropdown {
-    padding: .5rem;
     display: flex;
     flex-direction: column;
-}
-
-product-menu label,
-product-menu select,
-product-menu .total-price {
-    font-size: 22px;
-}
-
-product-menu .total-price {
-    padding: 0 .5rem;
-    margin-top: 0;
-    font-weight: bold;
 }
 
 product-menu-total #container3D {
@@ -63,4 +47,63 @@ product-menu-total #container3D {
     /* position: absolute; */
     top: 0;
     left: 0;
+}
+
+product-menu .dropdown {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+product-menu label,
+product-menu select,
+product-menu .total-price,
+product-menu .place-order-btn,
+.order-confirmation button {
+    font-size: 22px;
+}
+
+product-menu .total-price {
+    padding: 0 .5rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+product-menu .place-order-btn {
+    margin: .5rem;
+}
+
+.order-confirmation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(155, 155, 155, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-confirmation div {
+    background-color: white;
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.order-confirmation div ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.order-confirmation div li:last-child {
+    font-weight: bold;
+}
+
+.order-confirmation div li {
+    display: flex;
+    justify-content: space-between;
 }

@@ -177,12 +177,68 @@ class ProductMenu extends HTMLElement {
             total += data.option.price
         })
 
+        // remove previous total price element
         this.querySelector('.total-price')?.remove();
         
         const totalEl = document.createElement("p");
         totalEl.textContent = `Total: £${total}`
         totalEl.classList.add("total-price");
         this.append(totalEl);
+
+        this.currentPrice = total;
+
+        this.RenderPlaceOrderButton();
+    }
+
+    RenderPlaceOrderButton()
+    {
+        // remove previous button
+        this.querySelector('.place-order-btn')?.remove();
+
+        const orderButton = document.createElement('button');
+        orderButton.classList.add("place-order-btn")
+        orderButton.textContent = "Place order";
+        this.append(orderButton);
+
+        orderButton.addEventListener("click", this.RenderOrderConfirmationOverlay.bind(this))
+    }
+
+    RenderOrderConfirmationOverlay()
+    {
+        // remove previous order confirmation
+        document.body.querySelector('.order-confirmation')?.remove();
+
+        const orderConfirmation = document.createElement("div");
+        orderConfirmation.classList.add("order-confirmation")
+
+        const orderInfo = document.createElement("div");        
+        orderInfo.innerHTML = `<h1>Order confirmed!</h1><ul></ul><p>Thank you for your order!</p><button>Close</button>`
+
+        const list = orderInfo.querySelector('ul');
+        list.innerHTML = `<li><span>${this.currentProduct.productData.title}</span>
+                            <span>£${this.currentProduct.productData.price.toFixed(2)}</span></li>`;
+
+        // loop over all extras.
+        this.currentProduct.extras.forEach((data) => {
+            const newLi = document.createElement('li');
+            newLi.innerHTML = `<span>${data.option.title}</span>
+                                <span>£${data.option.price.toFixed(2)}</span>`
+            list.append(newLi);
+        })
+
+        const totalPrice = document.createElement('li');
+        totalPrice.innerHTML = `<span>Total:</span>
+                            <span>£${this.currentPrice.toFixed(2)}</span>`
+        list.append(totalPrice);
+
+        orderConfirmation.append(orderInfo);
+
+        const closeOverlayBtn = orderConfirmation.querySelector('button');
+        closeOverlayBtn.addEventListener("click", () => {
+            document.body.querySelector('.order-confirmation')?.remove();
+        })
+
+        document.body.prepend(orderConfirmation);
     }
 
 }
