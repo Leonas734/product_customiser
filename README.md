@@ -1,3 +1,5 @@
+## [LIVE PREVIEW](https://leonas734.github.io/product_customiser/html/product-customiser/index.html)
+
 ## Quickstart
 
 1. Check if your computer has npm and NodeJS installed using `node -v` `npm -v`. Installation instructions can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
