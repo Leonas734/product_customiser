@@ -42,8 +42,11 @@ class MainPage extends HTMLElement {
                 
             },
             function (xhr) {
-                //While it is loading, log the progress
-                HandleUpdateLoadingBar(xhr.loaded / xhr.total * 100);
+                //While it is loading, log the progress 
+                const value = xhr.loaded / xhr.total * 100;
+                
+                // For some reason the total is sometimes higher than 100%, so we clamp it at 100%.
+                HandleUpdateLoadingBar(value > 100 ? 100 : value);
             },
             function (error) {
                 //If there is an error, log it
